@@ -9,7 +9,6 @@ describe VideoInfo do
 
     it "uses the first usable provider" do
       VideoInfo::Providers::Vimeo.stub(:usable?) { false }
-      VideoInfo::Providers::Vkontakte.stub(:usable?) { false }
       VideoInfo::Providers::Youtube.stub(:usable?) { true }
       VideoInfo::Providers::Youtube.stub(:new) { provider }
 
@@ -18,7 +17,6 @@ describe VideoInfo do
 
     it "raise when no providers are usable" do
       VideoInfo::Providers::Vimeo.stub(:usable?) { false }
-      VideoInfo::Providers::Vkontakte.stub(:usable?) { false }
       VideoInfo::Providers::Youtube.stub(:usable?) { false }
 
       expect { VideoInfo.new(url, options) }.to raise_error(VideoInfo::UrlError)
@@ -31,7 +29,6 @@ describe VideoInfo do
 
     it "returns true when a provider is usable" do
       VideoInfo::Providers::Vimeo.stub(:usable?) { false }
-      VideoInfo::Providers::Vkontakte.stub(:usable?) { false }
       VideoInfo::Providers::Youtube.stub(:usable?) { true }
       VideoInfo::Providers::Youtube.stub(:new) { true }
 
@@ -40,7 +37,6 @@ describe VideoInfo do
 
     it "returns false when no providers are usable" do
       VideoInfo::Providers::Vimeo.stub(:usable?) { false }
-      VideoInfo::Providers::Vkontakte.stub(:usable?) { false }
       VideoInfo::Providers::Youtube.stub(:usable?) { false }
 
       expect(VideoInfo.usable?(url)).to be_false
